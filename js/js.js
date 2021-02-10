@@ -77,3 +77,14 @@ class Card {
 			divCardBody.appendChild(p);
 	}
 }
+
+let monPanier = document.getElementById("monPanier");
+
+function produitsDansLePanier(){
+	let produitsDansLocalStorage = localStorage.getItem("peluche");
+	if (produitsDansLocalStorage){
+		monPanier.innerHTML = produitsDansLocalStorage;
+		console.log("ok")
+	}
+}
+produitsDansLePanier();
