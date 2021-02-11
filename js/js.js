@@ -3,8 +3,7 @@ request.onreadystatechange = function(){
 	if(this.readyState = XMLHttpRequest.DONE && this.readyState == 4){
   		if (this.status == 200){
 	    	let response = JSON.parse(this.responseText);
-			//document.getElementById("row").textContent = ""; 
-	    	//createCard(response);
+			//document.getElementById("row").textContent = "";
 	    	for(let i=0; i < response.length; i++){
 				let card = new Card(
 					response[i].colors,
@@ -34,14 +33,15 @@ class Card {
 		this.description = description;
 	}
 	generateCard(response){
-		console.log("go");
 			let row = document.getElementById("row");
 
 			//création du lien
 			let lien = document.createElement("a");
 			lien.setAttribute("class", "stretched-link col-4 m-5");
-			lien.setAttribute("href", "produit.html" + "?" + this.name);
+			//Pour ajouter le "?" dans l'URL
+			lien.setAttribute("href", "produit.html?id=" + this._id);
 			row.appendChild(lien);
+
 			// création de la première div col
 	    	let divCol = document.createElement("div");
 			divCol.classList.add("col");
@@ -78,13 +78,14 @@ class Card {
 	}
 }
 
+//Pour afficher ce qu'il y a dans le panier
+
 let monPanier = document.getElementById("monPanier");
 
 function produitsDansLePanier(){
-	let produitsDansLocalStorage = localStorage.getItem("peluche");
+	let produitsDansLocalStorage = localStorage.getItem(urlId);
 	if (produitsDansLocalStorage){
 		monPanier.innerHTML = produitsDansLocalStorage;
-		console.log("ok")
 	}
 }
 produitsDansLePanier();

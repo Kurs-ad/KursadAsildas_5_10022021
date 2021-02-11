@@ -1,7 +1,11 @@
+/*// Pour changer les paramètres de l'URL
 let pointDinterrogation = window.location.href.indexOf("?");
 let parametresURL = window.location.href.substr(pointDinterrogation + 1);
-parametresURL = parametresURL.replace(/%20/g, " ");
-console.log(parametresURL);
+parametresURL = parametresURL.replace(/%20/g, " ");*/
+
+const url = window.location.search;
+const urlParam = new URLSearchParams(url);
+const urlId = urlParam.get("id");
 
 let request = new XMLHttpRequest();
 request.onreadystatechange = function(){
@@ -9,17 +13,24 @@ request.onreadystatechange = function(){
 		if(this.status ==200){
 			let response = JSON.parse(this.responseText);
 			for(i=0; i < response.length; i++){
-				let descriptifPeluche = response[i].name;
-				if(descriptifPeluche == parametresURL){
+				let descriptifPeluche = response[i]._id;
+				if(descriptifPeluche == urlId){
 					let card = new Card(
-					response[i].colors,
-					response[i]._id,
-					response[i].name,
-					response[i].price,
-					response[i].imageUrl,
-					response[i].description,
-					);
+						response[i].colors,
+						response[i]._id,
+						response[i].name,
+						response[i].price,
+						response[i].imageUrl,
+						response[i].description,
+						);
 					card.generateCard();
+					console.log(card.name);
+					document.getElementById("boutonAjouter").addEventListener("click", function(){
+					ajoutDeProduits();
+					});
+					document.getElementById("boutonSupprimer").addEventListener("click", function(){
+					suppressionDeProduits();
+					});
 				}
 			}
 		} else{
@@ -40,7 +51,6 @@ class Card {
 		this.description = description;
 	}
 	generateCard(response){
-		console.log("go");
 			let row = document.getElementById("row");
 
 			// création de la première div col
@@ -78,3 +88,21 @@ class Card {
 			divCardBody.appendChild(p);
 	}
 }
+
+
+function produitsDansLePanier(){
+	/*let keysNumbersSum;
+	for(let i=0; i < localStorage.length; i++){
+		let keyValue = localStorage.key(i);
+		console.log(keyValue);
+		keysNumbersSum += keyValue;
+		console.log(keysNumbersSum);
+	}*/
+	let produitsDansLocalStorage = localStorage.getItem(urlId);
+	console.log(produitsDansLocalStorage);
+	if (produitsDansLocalStorage > 0){
+		monPanier.innerHTML = produitsDansLocalStorage;
+	}
+};
+console.log(localStorage)
+produitsDansLePanier();
