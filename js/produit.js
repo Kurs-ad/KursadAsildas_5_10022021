@@ -3,7 +3,7 @@ let pointDinterrogation = window.location.href.indexOf("?");
 let parametresURL = window.location.href.substr(pointDinterrogation + 1);
 parametresURL = parametresURL.replace(/%20/g, " ");*/
 
-const url = window.location.search;
+const url = window.location.search; //Partie de l'URL qui suit "?"
 const urlParam = new URLSearchParams(url);
 const urlId = urlParam.get("id");
 
@@ -24,7 +24,6 @@ request.onreadystatechange = function(){
 						response[i].description,
 						);
 					card.generateCard();
-					console.log(card.name);
 					document.getElementById("boutonAjouter").addEventListener("click", function(){
 					ajoutDeProduits();
 					});
@@ -81,28 +80,49 @@ class Card {
 			h2.textContent = this.name;
 			divCardBody.appendChild(h2);
 
+			// création des choix de couleur
+			let choixCouleurs = document.createElement("select");
+			let label = document.createElement("label");
+			label.textContent = "Customiser ";
+			if(this.colors.length > 1){
+				for(i=0; i<this.colors.length; i++){
+					let option = document.createElement("option");
+					option.textContent = this.colors[i];
+					choixCouleurs.appendChild(option);
+				}
+			} else {
+				let option = document.createElement("option");
+				option.textContent = this.colors;
+				choixCouleurs.appendChild(option);
+			}
+			label.appendChild(choixCouleurs);
+			divCardBody.appendChild(label);
+
 			// création du prix de la carte
 			let p = document.createElement("p");
 			p.setAttribute("class", "card-text");
-			p.innerHTML = this.price + " €" + "<br/>" + this.description + "<br/><br/><button id='boutonSupprimer' class='col-6 btn btn-light'>Supprimer du panier</button><button id='boutonAjouter' class='col-6 btn btn-primary'>Ajouter au panier</button>" ;
+			p.innerHTML = this.price/100 + " €" + "<br/>" + this.description + "<br/><br/><button id='boutonSupprimer' class='col-6 btn btn-light'>Supprimer du panier</button><button id='boutonAjouter' class='col-6 btn btn-primary'>Ajouter au panier</button>" ;
 			divCardBody.appendChild(p);
 	}
-}
+};
 
+
+let monPanier = document.getElementById("monPanier");
 
 function produitsDansLePanier(){
-	/*let keysNumbersSum;
+	let valueSum = 0;
 	for(let i=0; i < localStorage.length; i++){
-		let keyValue = localStorage.key(i);
-		console.log(keyValue);
-		keysNumbersSum += keyValue;
-		console.log(keysNumbersSum);
-	}*/
-	let produitsDansLocalStorage = localStorage.getItem(urlId);
-	console.log(produitsDansLocalStorage);
-	if (produitsDansLocalStorage > 0){
-		monPanier.innerHTML = produitsDansLocalStorage;
+		let keyValue = localStorage.getItem(localStorage.key(i));
+		if(keyValue!=localStorage.getItem("total_panier2") && keyValue!=localStorage.getItem("total_panier")){
+			valueSum += parseInt(keyValue);
+			if (valueSum > 0){
+				monPanier.innerHTML = valueSum;
+			} else {
+				monPanier.innerHTML = ""
+			}
+		}
 	}
 };
-console.log(localStorage)
+console.log(localStorage);
 produitsDansLePanier();
+

@@ -1,0 +1,12 @@
+a{
+	color: #363636;
+}
+
+.card{
+	border-radius: 0.5rem;
+	box-shadow: 0px 0px 10px lightgrey, 0px 0px 10px lightgrey;
+}
+
+.card-body{
+	border-top: 1px solid lightgrey;
+}

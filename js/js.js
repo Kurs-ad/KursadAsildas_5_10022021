@@ -14,6 +14,7 @@ request.onreadystatechange = function(){
 					response[i].description,
 					);
 				card.generateCard();
+				console.log(response[i].name)
 			}
 		} else {
     		console.error("blabla");
@@ -32,7 +33,7 @@ class Card {
 		this.imageUrl = imageUrl;
 		this.description = description;
 	}
-	generateCard(response){
+	generateCard(){
 			let row = document.getElementById("row");
 
 			//création du lien
@@ -45,7 +46,7 @@ class Card {
 			// création de la première div col
 	    	let divCol = document.createElement("div");
 			divCol.classList.add("col");
-			lien	.appendChild(divCol);
+			lien.appendChild(divCol);
 
 			// création de la deuxième div col
 			let divCard = document.createElement("div");
@@ -73,7 +74,7 @@ class Card {
 			// création du prix de la carte
 			let p = document.createElement("p");
 			p.setAttribute("class", "card-text");
-			p.textContent = this.price + " €";
+			p.textContent = this.price/100 + " €";
 			divCardBody.appendChild(p);
 	}
 }
@@ -83,9 +84,18 @@ class Card {
 let monPanier = document.getElementById("monPanier");
 
 function produitsDansLePanier(){
-	let produitsDansLocalStorage = localStorage.getItem(urlId);
-	if (produitsDansLocalStorage){
-		monPanier.innerHTML = produitsDansLocalStorage;
+	let valueSum = 0;
+	for(let i=0; i < localStorage.length; i++){
+		let keyValue = localStorage.getItem(localStorage.key(i));
+		if(keyValue!=localStorage.getItem("total_panier2") && keyValue!=localStorage.getItem("total_panier")){
+			valueSum += parseInt(keyValue);
+			console.log(valueSum);
+			if (valueSum > 0){
+				monPanier.innerHTML = valueSum;
+			} else {
+				monPanier.innerHTML = "";
+			}
+		}
 	}
-}
+};
 produitsDansLePanier();
