@@ -77,25 +77,4 @@ class Card {
 			p.textContent = this.price/100 + " €";
 			divCardBody.appendChild(p);
 	}
-}
-
-//Pour afficher ce qu'il y a dans le panier
-
-let monPanier = document.getElementById("monPanier");
-
-function produitsDansLePanier(){
-	let valueSum = 0;
-	for(let i=0; i < localStorage.length; i++){
-		let keyValue = localStorage.getItem(localStorage.key(i));
-		if(keyValue!=localStorage.getItem("total_panier2") && keyValue!=localStorage.getItem("total_panier")){
-			valueSum += parseInt(keyValue);
-			console.log(valueSum);
-			if (valueSum > 0){
-				monPanier.innerHTML = valueSum;
-			} else {
-				monPanier.innerHTML = "";
-			}
-		}
-	}
 };
-produitsDansLePanier();

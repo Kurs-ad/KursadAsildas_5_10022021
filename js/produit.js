@@ -105,24 +105,3 @@ class Card {
 			divCardBody.appendChild(p);
 	}
 };
-
-
-let monPanier = document.getElementById("monPanier");
-
-function produitsDansLePanier(){
-	let valueSum = 0;
-	for(let i=0; i < localStorage.length; i++){
-		let keyValue = localStorage.getItem(localStorage.key(i));
-		if(keyValue!=localStorage.getItem("total_panier2") && keyValue!=localStorage.getItem("total_panier")){
-			valueSum += parseInt(keyValue);
-			if (valueSum > 0){
-				monPanier.innerHTML = valueSum;
-			} else {
-				monPanier.innerHTML = ""
-			}
-		}
-	}
-};
-console.log(localStorage);
-produitsDansLePanier();
-
