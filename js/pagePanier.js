@@ -22,18 +22,18 @@ request.onreadystatechange = function(){
 				}
 				document.getElementById("prixTotal").textContent = localStorage.getItem("total_panier") + "€";*/
 				
-				/*let boutonAjouter = document.getElementsByClassName("ajouterProduit");
-				for(let i=0; i < boutonAjouter.length; i++){
-					boutonAjouter[i].addEventListener("click", function(){
-						ajoutDeProduits();
+				let boutonAjouter = document.getElementsByClassName("ajouterProduit");
+				for(let e=0; e < boutonAjouter.length; e++){
+					boutonAjouter[e].addEventListener("click", function(){
+						ajoutDeProduits(response[i]._id);
 					})
 				};
 				let boutonSupprimer = document.getElementsByClassName("supprimerProduit");
-				for(let i=0; i < boutonAjouter.length; i++){
-					boutonSupprimer[i].addEventListener("click", function(){
-						suppressionDeProduits();
+				for(let x=0; x < boutonAjouter.length; x++){
+					boutonSupprimer[x].addEventListener("click", function(){
+						suppressionDeProduits(response[i]._id);
 					})
-				};*/
+				};
 			}
 		} else {
     		console.error("blabla");
@@ -53,53 +53,54 @@ class ElementsDuPanier {
 		this.description = description;
 	}
 	tableauPanier(){
-		let panierElts = JSON.parse(localStorage.getItem("peluchesDansLePanier"));
-		for(let i=0; i<panierElts.length; i++){
-			let key = Object.keys(panierElts[i]);
-			let value = parseInt(Object.values(panierElts[i]));
-			let prixTotal = document.getElementById("prixTotal");
-			if(key == this._id){
-				let monTableau = document.getElementById("tableau");
-				// création de la ligne contenant toutes les informations
-				let lignePrincipale = document.createElement("tr");
+		if(localStorage.getItem("peluchesDansLePanier")){
+			let panierElts = JSON.parse(localStorage.getItem("peluchesDansLePanier"));
+			for(let i=0; i<panierElts.length; i++){
+				let key = Object.keys(panierElts[i]);
+				let value = parseInt(Object.values(panierElts[i]));
+				let prixTotal = document.getElementById("prixTotal");
+				if(key == this._id){
+					let monTableau = document.getElementById("tbody");
+					// création de la ligne contenant toutes les informations
+					let lignePrincipale = document.createElement("tr");
 
-				// création d'une colonne de la ligne principale contenant une image d'un produit du panier
-				let colonneImage = document.createElement("td");
-				colonneImage.innerHTML = "<img style='width:200px; height:200px; object-fit:cover' src='" + this.imageUrl + "'/>";
+					// création d'une colonne de la ligne principale contenant une image d'un produit du panier
+					let colonneImage = document.createElement("td");
+					colonneImage.innerHTML = "<img style='width:200px; height:200px; object-fit:cover' src='" + this.imageUrl + "'/>";
 
-				// création d'une colonne de la ligne principale contenant la description du produit
-				let colonneDescriptif = document.createElement("td");
-				/*let boutonAjouter = document.createElement("button");
-				boutonAjouter.setAttribute("class", "ajouterProduit btn btn-primary");
-				boutonAjouter.textContent = "+";
-				let boutonSupprimer = document.createElement("button");
-				boutonSupprimer.setAttribute("class", 'supprimerProduit btn btn-light');
-				boutonSupprimer.textContent = "-";
-				let quantity = document.createElement("span");
-				quantity.setAttribute("class", "quantity");
-				for(let e=0; e < localStorage.getItem("peluchesDansLePanier").length; e++){
-					let keys = Object.keys(localStorage.getItem("peluchesDansLePanier")[e]);
-					if(keys == this._id){
+					// création d'une colonne de la ligne principale contenant la description du produit
+					let colonneDescriptif = document.createElement("td");
+					let boutonAjouter = document.createElement("button");
+					boutonAjouter.setAttribute("class", "ajouterProduit btn btn-primary");
+					boutonAjouter.textContent = "+";
+					console.log(boutonAjouter)
+					let boutonSupprimer = document.createElement("button");
+					boutonSupprimer.setAttribute("class", 'supprimerProduit btn btn-light');
+					boutonSupprimer.textContent = "-";
+					let quantity = document.createElement("span");
+					quantity.setAttribute("class", "quantity");
+					quantity.textContent = value + " ";
+					console.log(key)
+					colonneDescriptif.innerHTML = this.name + "<br/>"+ this.description + "<br/><br/>" + "Quantité : ";
+					colonneDescriptif.appendChild(boutonSupprimer);
+					colonneDescriptif.appendChild(quantity);
+					colonneDescriptif.appendChild(boutonAjouter);
 
-					}
+					// création d'une colonne de la ligne principale contenant le prix du produit
+					let colonnePrix = document.createElement("td");
+					colonnePrix.textContent = parseInt(this.price)/100*value;
+
+					// Mise à jour du prix total
+					let prixTotal = parseInt(document.getElementById("prixTotal").textContent);
+					prixTotal += parseInt(this.price)/100*value;
+					document.getElementById("prixTotal").textContent = prixTotal;
+
+					// Insertion de ces éléments dans le DOM
+					lignePrincipale.appendChild(colonneImage);
+					lignePrincipale.appendChild(colonneDescriptif);
+					lignePrincipale.appendChild(colonnePrix);
+					monTableau.appendChild(lignePrincipale);
 				}
-				quantity.textContent = Object.values(JSON.parse(localStorage.getItem("peluchesDansLePanier"))[this._id]);*/
-				colonneDescriptif.innerHTML = this.name + "<br/>"+ this.description;
-
-				// création d'une colonne de la ligne principale contenant le prix du produit
-				let colonnePrix = document.createElement("td");
-				colonnePrix.textContent = parseInt(this.price)/100*value;
-
-				// Mise à jour du prix total
-				let prixTotal = parseInt(document.getElementById("prixTotal").textContent);
-				prixTotal += parseInt(this.price)/100*value;
-				document.getElementById("prixTotal").textContent = prixTotal;
-
-				// Insertion de ces éléments dans le DOM
-				lignePrincipale.appendChild(colonneImage);
-				lignePrincipale.appendChild(colonneDescriptif);
-				lignePrincipale.appendChild(colonnePrix);
-				monTableau.appendChild(lignePrincipale);
 			}
 		}
 	}

@@ -25,10 +25,10 @@ request.onreadystatechange = function(){
 						);
 					card.generateCard();
 					document.getElementById("boutonAjouter").addEventListener("click", function(){
-					ajoutDeProduits();
+					ajoutDeProduits(urlId);
 					});
 					document.getElementById("boutonSupprimer").addEventListener("click", function(){
-					suppressionDeProduits();
+					suppressionDeProduits(urlId);
 					});
 				}
 			}

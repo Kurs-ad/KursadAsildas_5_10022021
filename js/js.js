@@ -45,7 +45,7 @@ class Card {
 
 			// création de la première div col
 	    	let divCol = document.createElement("div");
-			divCol.classList.add("col");
+			divCol.setAttribute("class", "col");
 			lien.appendChild(divCol);
 
 			// création de la deuxième div col
@@ -66,10 +66,10 @@ class Card {
 			divCard.appendChild(divCardBody);
 
 			// création du titre de la carte
-			let h2 = document.createElement("h2");
-			h2.setAttribute("class", "card-title");
-			h2.textContent = this.name;
-			divCardBody.appendChild(h2);
+			let h4 = document.createElement("h4");
+			h4.setAttribute("class", "card-title");
+			h4.textContent = this.name;
+			divCardBody.appendChild(h4);
 
 			// création du prix de la carte
 			let p = document.createElement("p");
