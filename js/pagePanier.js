@@ -14,6 +14,7 @@ request.onreadystatechange = function(){
 					response[i].description,
 					);
 				tableau.tableauPanier();
+				console.log(response[i]._id)
 				/*for(let e=0; e<localStorage.length; e++){
 					if(localStorage.key(e) == response[i]._id){
 						myTotalStorage += response[i].price/100 * parseInt(localStorage.getItem(localStorage.key(e)));
@@ -22,19 +23,22 @@ request.onreadystatechange = function(){
 				}
 				document.getElementById("prixTotal").textContent = localStorage.getItem("total_panier") + "€";*/
 				
-				let boutonAjouter = document.getElementsByClassName("ajouterProduit");
-				for(let e=0; e < boutonAjouter.length; e++){
-					boutonAjouter[e].addEventListener("click", function(){
-						ajoutDeProduits(response[i]._id);
-					})
-				};
-				let boutonSupprimer = document.getElementsByClassName("supprimerProduit");
-				for(let x=0; x < boutonAjouter.length; x++){
-					boutonSupprimer[x].addEventListener("click", function(){
-						suppressionDeProduits(response[i]._id);
-					})
-				};
+				
 			}
+			let boutonAjouter = document.getElementsByClassName("ajouterProduit");
+			for(let e=0; e < boutonAjouter.length; e++){
+				let id = boutonAjouter[e].classList[0];
+				boutonAjouter[e].addEventListener("click", function(){
+					ajoutDeProduits(id);
+				})
+			};
+			let boutonSupprimer = document.getElementsByClassName("supprimerProduit");
+			for(let x=0; x < boutonAjouter.length; x++){
+				let id = boutonSupprimer[x].classList[0];
+				boutonSupprimer[x].addEventListener("click", function(){
+					suppressionDeProduits(id);
+				})
+			};
 		} else {
     		console.error("blabla");
     	}
@@ -70,17 +74,20 @@ class ElementsDuPanier {
 
 					// création d'une colonne de la ligne principale contenant la description du produit
 					let colonneDescriptif = document.createElement("td");
+					
 					let boutonAjouter = document.createElement("button");
-					boutonAjouter.setAttribute("class", "ajouterProduit btn btn-primary");
+					boutonAjouter.setAttribute("class", this._id + " ajouterProduit btn btn-primary");
 					boutonAjouter.textContent = "+";
-					console.log(boutonAjouter)
+					
 					let boutonSupprimer = document.createElement("button");
-					boutonSupprimer.setAttribute("class", 'supprimerProduit btn btn-light');
+					boutonSupprimer.setAttribute("class", this._id + ' supprimerProduit btn btn-light');
 					boutonSupprimer.textContent = "-";
+					
 					let quantity = document.createElement("span");
 					quantity.setAttribute("class", "quantity");
-					quantity.textContent = value + " ";
+					quantity.textContent = " " + value + " ";
 					console.log(key)
+					
 					colonneDescriptif.innerHTML = this.name + "<br/>"+ this.description + "<br/><br/>" + "Quantité : ";
 					colonneDescriptif.appendChild(boutonSupprimer);
 					colonneDescriptif.appendChild(quantity);
@@ -88,6 +95,7 @@ class ElementsDuPanier {
 
 					// création d'une colonne de la ligne principale contenant le prix du produit
 					let colonnePrix = document.createElement("td");
+					colonnePrix.setAttribute("class", "prixDuProduit");
 					colonnePrix.textContent = parseInt(this.price)/100*value;
 
 					// Mise à jour du prix total
