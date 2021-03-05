@@ -44,7 +44,7 @@
 					<thead>
 						<tr>
 							<th scope="col">Descriptif du produit</th>
-							<th scope="col">Prix</th>
+							<th class="text-right" scope="col" colspan="2">Prix</th>
 						</tr>
 					</thead>
 					<tbody id="tbody"></tbody>
@@ -60,7 +60,7 @@
 					</tr> -->
 					<tfoot>
 						<tr>
-							<td colspan="2" class="text-right">Prix total</td>
+							<td colspan="2" class="text-right" style="font-weight: bold;">Prix total</td>
 							<td id="prixTotal">0</td>
 						</tr>
 					</tfoot>
@@ -111,9 +111,16 @@
 			</div>
 		</div>
 	</footer>
-	<script type="text/javascript" src="./js/pagePanier.js"></script>
+	<!-- <script type="text/javascript" src="./js/pagePanier.js"></script> -->
+
+	<script type="text/javascript" src="js/ajaxRequest.js"></script>
+	<script type="text/javascript" src="js/panier/classTableElements.js"></script>
+	<script type="text/javascript" src="js/panier/boutonsAjouterSupprimer.js"></script>
+	<script type="text/javascript" src="js/panier/deleteButtonForTable.js"></script>
+	<script type="text/javascript" src="js/panier/addButtonForTable.js"></script>
+	<script type="text/javascript" src="js/panier/createTableElements.js"></script>
+	<script type="text/javascript" src="js/panier/asyncAjaxPourPanier.js"></script>
 	<script type="text/javascript" src="./js/formValidation.js"></script>
-	<script type="text/javascript" src="./js/boutonsAjouterSupprimer.js"></script>
 	<script type="text/javascript" src="js/iconePanier.js"></script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

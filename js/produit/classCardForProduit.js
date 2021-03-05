@@ -1,45 +1,3 @@
-/*// Pour changer les paramètres de l'URL
-let pointDinterrogation = window.location.href.indexOf("?");
-let parametresURL = window.location.href.substr(pointDinterrogation + 1);
-parametresURL = parametresURL.replace(/%20/g, " ");*/
-
-const url = window.location.search; //Partie de l'URL qui suit "?"
-const urlParam = new URLSearchParams(url);
-const urlId = urlParam.get("id");
-
-let request = new XMLHttpRequest();
-request.onreadystatechange = function(){
-	if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
-		if(this.status ==200){
-			let response = JSON.parse(this.responseText);
-			for(i=0; i < response.length; i++){
-				let descriptifPeluche = response[i]._id;
-				if(descriptifPeluche == urlId){
-					let card = new Card(
-						response[i].colors,
-						response[i]._id,
-						response[i].name,
-						response[i].price,
-						response[i].imageUrl,
-						response[i].description,
-						);
-					card.generateCard();
-					document.getElementById("boutonAjouter").addEventListener("click", function(){
-					ajoutDeProduits(urlId);
-					});
-					document.getElementById("boutonSupprimer").addEventListener("click", function(){
-					suppressionDeProduits(urlId);
-					});
-				}
-			}
-		} else{
-			console.error("erreur");
-		}
-	}
-};
-request.open("GET", "http://localhost:3000/api/teddies/"+urlId);
-request.send();1
-
 class Card {
 	constructor(colors, _id, name, price, imageUrl, description){
 		this.colors = colors; 
@@ -85,7 +43,7 @@ class Card {
 			let label = document.createElement("label");
 			label.textContent = "Customiser ";
 			if(this.colors.length > 1){
-				for(i=0; i<this.colors.length; i++){
+				for(let i=0; i<this.colors.length; i++){
 					let option = document.createElement("option");
 					option.textContent = this.colors[i];
 					choixCouleurs.appendChild(option);

@@ -59,7 +59,7 @@ boutonDenvoi.addEventListener("click", () => {
 	let nom = textInput[1].value;
 	let telephone = phoneInput.value;
 	let mail = mailInput.value;
-	let contact = [prenom, nom, telephone, mail];
+	let product_id = [prenom, nom, telephone, mail];
 	let request = new XMLHttpRequest;
 	request.onreadystatechange = function(){
 		if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
@@ -67,7 +67,7 @@ boutonDenvoi.addEventListener("click", () => {
 			}
 		}
 	}
-	request.open("POST", "http://localhost:3000/api/teddies/order");
+	request.open("POST", "http://localhost:3000/api/teddies");
 	request.SetRequestHeader("Content-Type", "application/JSON");
-	request.send(jSON.stringify(contact));
+	request.send(jSON.stringify(product_id));
 })
