@@ -7,12 +7,12 @@ class Card {
 		this.imageUrl = imageUrl;
 		this.description = description;
 	}
-	generateCard(response){
+	generateCardProduit(response){
 			let row = document.getElementById("row");
 
 			// création de la première div col
 	    	let divCol = document.createElement("div");
-			divCol.classList.add("col-6");
+			divCol.setAttribute("class", "col-sm-6 col m-5 cardDimensions");
 			row.appendChild(divCol);
 
 			// création de la deuxième div col
@@ -23,7 +23,7 @@ class Card {
 
 			// création de l'image de la carte, enfant du second col
 			let img = document.createElement("img");
-			img.setAttribute("class", "card-mg-top");
+			img.setAttribute("class", "card-img-top");
 			img.setAttribute("src", this.imageUrl);
 			divCard.appendChild(img);
 

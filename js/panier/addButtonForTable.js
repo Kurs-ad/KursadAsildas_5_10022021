@@ -10,13 +10,13 @@ function boutonAjouterPourTableau(){
 			produitsDansLePanier();
 			let valeurProduit = parseInt(document.getElementsByClassName("prixProduit")[e].textContent);
 			let newQuantity = valeurProduit * quantity;
-			document.getElementsByClassName("prixDuProduit")[e].textContent = newQuantity;
+			document.getElementsByClassName("prixDuProduit")[e].textContent = newQuantity + "€";
 			let colonnePrix = document.getElementsByClassName("prixDuProduit");
 			let prixTotal = 0;
 			for(let y=0; y < colonnePrix.length; y++){
 				let valeurColonnePrix = parseInt(colonnePrix[y].textContent);
 				prixTotal += valeurColonnePrix;
-				document.getElementById("prixTotal").textContent = prixTotal;
+				document.getElementById("prixTotal").textContent = prixTotal + "€";
 			};
 		});
 	};

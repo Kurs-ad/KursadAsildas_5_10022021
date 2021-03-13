@@ -44,7 +44,7 @@ class ElementsDuPanier {
 					quantity.textContent = " " + value + " ";
 					console.log(key)
 					
-					colonneDescriptif.innerHTML = this.name + "<br/><br/>"+ this.description + "<br/><br/>" + "Quantité : ";
+					colonneDescriptif.innerHTML = "<strong>" + this.name + "</strong>" + "<br/><br/>"+ this.description + "<br/><br/>" + "Quantité : ";
 					colonneDescriptif.appendChild(boutonSupprimer);
 					colonneDescriptif.appendChild(quantity);
 					colonneDescriptif.appendChild(boutonAjouter);
@@ -53,12 +53,12 @@ class ElementsDuPanier {
 					// création d'une colonne de la ligne principale contenant le prix du produit
 					let colonnePrix = document.createElement("td");
 					colonnePrix.setAttribute("class", "prixDuProduit");
-					colonnePrix.textContent = parseInt(this.price)/100*value;
+					colonnePrix.textContent = parseInt(this.price)/100*value + "€";
 
 					// Mise à jour du prix total
 					let prixTotal = parseInt(document.getElementById("prixTotal").textContent);
 					prixTotal += parseInt(this.price)/100*value;
-					document.getElementById("prixTotal").textContent = prixTotal;
+					document.getElementById("prixTotal").textContent = prixTotal + "€";
 
 					// Insertion de ces éléments dans le DOM
 					lignePrincipale.appendChild(colonneImage);

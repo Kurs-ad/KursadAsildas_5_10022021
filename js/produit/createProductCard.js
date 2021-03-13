@@ -8,7 +8,7 @@ function createProductCard(object){
 		object.imageUrl,
 		object.description,
 		);
-	card.generateCard();
+	card.generateCardProduit();
 	document.getElementById("boutonAjouter").addEventListener("click", function(){
 	ajoutDeProduits(getIdOnUrl());
 	});

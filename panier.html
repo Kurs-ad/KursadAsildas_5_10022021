@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Orinoco - Teddies</title>
 </head>
 
@@ -75,14 +76,15 @@
 						<label class="" for="prenom">Prénom<input id="prenom" type="text" minlength="2" class="form-control textInput" required><span class="alerteTextInput"></span></label>
 					</div>
 					<div class="form-group">
-						<label class="" for="adresse">Adresse complète<textarea id="adresse" type="text" rows="3" cols="50" class="form-control" required></textarea></label>
+						<label class="" for="adresse">Adresse<textarea id="adresse" type="text" rows="2" cols="25" class="form-control" required></textarea></label>
+						<label class="" for="prenom">Ville<textarea id="city" type="text" minlength="2" cols="20" rows="1" class="form-control textInput" required></textarea></label>
 					</div>
 					<div class="form-group">
 						<label class="" for="telephone">Téléphone<input id="telephone" type="tel" class="form-control phoneInput" required></label>
 						<label class="" for="mail">Adresse mail<input id="mail" type="email" class="form-control mailInput" required></label>
 					</div>
 					<div class="form-group">
-						<label class="" for="submit"><a id="boutonDenvoi" class="btn"><input id="submit" type="submit" class="form-control"></a></label>
+						<label class="" for="submit"><a id="boutonDenvoi" href="commande.html" class="btn"><input id="submit" type="submit" class="form-control"></a></label>
 					</div>
 				</form>
 			</div>
@@ -120,7 +122,7 @@
 	<script type="text/javascript" src="js/panier/addButtonForTable.js"></script>
 	<script type="text/javascript" src="js/panier/createTableElements.js"></script>
 	<script type="text/javascript" src="js/panier/asyncAjaxPourPanier.js"></script>
-	<script type="text/javascript" src="./js/formValidation.js"></script>
+	<script type="text/javascript" src="js/panier/formValidation.js"></script>
 	<script type="text/javascript" src="js/iconePanier.js"></script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

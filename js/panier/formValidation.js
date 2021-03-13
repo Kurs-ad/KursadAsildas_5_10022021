@@ -3,6 +3,8 @@ let alerteTextInput = document.getElementsByClassName("alerteTextInput")
 let phoneInput = document.getElementById("telephone");
 let mailInput = document.getElementById("mail");
 let boutonDenvoi = document.getElementById("boutonDenvoi");
+let ville = document.getElementById("city");
+let adresse = document.getElementById("adresse");
 
 for(let i=0; i < textInput.length; i++){
 	textInput[i].addEventListener("blur", function(e){
@@ -25,7 +27,7 @@ phoneInput.addEventListener("blur", function(e){
 		phoneInput.style.border = "3px solid red";
 		phoneInput.value = "";
 		phoneInput.setAttribute("placeholder", "Uniquement des chiffres");
-	} else if (value.length !== 10 && phoneInput.value.length > 0){
+	} else if (phoneInput.value.length !== 10 && phoneInput.value.length > 0){
 		phoneInput.style.border = "3px solid red";
 		phoneInput.value = "";
 		phoneInput.setAttribute("placeholder", "Entrez 10 chiffres");
@@ -49,25 +51,52 @@ mailInput.addEventListener("blur", function(){
 });
 
 
-
-let id = Math.floor(Math.random()*1000000);
-console.log(id)
-boutonDenvoi.setAttribute("href", "commande.html?id=" + id);
-
-boutonDenvoi.addEventListener("click", () => {
-	let prenom = textInput[0].value;
-	let nom = textInput[1].value;
-	let telephone = phoneInput.value;
+//boutonDenvoi.setAttribute("href", "commande.html?id=" + id);
+boutonDenvoi.addEventListener("click", (e) => {
+	let prenom = textInput[1].value;
+	let nom = textInput[0].value;
+	let phone = phoneInput.value;
+	let address = adresse.value;
 	let mail = mailInput.value;
-	let product_id = [prenom, nom, telephone, mail];
+	let city = ville.value;
+	let contact = {
+		firstName: prenom,
+		lastName: nom,
+		address: address,
+		city: city,
+		email: mail
+	};
+	let panierElts = JSON.parse(localStorage.getItem("peluchesDansLePanier"));
+	let product_id = [];
+	for(let i=0; i<panierElts.length; i++){
+		let key = Object.keys(panierElts[i]);
+		let value = JSON.parse(Object.values(panierElts[i]));
+		product_id.push(key[0]);
+	};
+	let commande = {
+		contact: contact,
+		products: product_id
+	};
+	let sendForm = JSON.stringify(commande);
 	let request = new XMLHttpRequest;
 	request.onreadystatechange = function(){
 		if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
-			if(this.status ==200){
+			if(this.status == 201){
+				console.log(JSON.parse(this.responseText).orderId, typeof JSON.parse(this.responseText));
+				let ordreEtNom = {
+					orderId : JSON.parse(this.responseText).orderId,
+					prenom : prenom
+				}
+				localStorage.setItem("commande", JSON.stringify(ordreEtNom));
+				console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
 			}
+		} else {
+			console.log(this.readyState, this.status)
+			console.log(this.responseText);
 		}
 	}
-	request.open("POST", "http://localhost:3000/api/teddies");
-	request.SetRequestHeader("Content-Type", "application/JSON");
-	request.send(jSON.stringify(product_id));
-})
+	request.open("POST", "http://localhost:3000/api/teddies/order");
+	request.setRequestHeader("Content-Type", "application/json");
+	request.send(sendForm);
+});
+
