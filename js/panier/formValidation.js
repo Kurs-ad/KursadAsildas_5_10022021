@@ -2,9 +2,9 @@ let textInput = document.getElementsByClassName("textInput");
 let alerteTextInput = document.getElementsByClassName("alerteTextInput")
 let phoneInput = document.getElementById("telephone");
 let mailInput = document.getElementById("mail");
-let boutonDenvoi = document.getElementById("boutonDenvoi");
 let ville = document.getElementById("city");
 let adresse = document.getElementById("adresse");
+let submit = document.getElementById("submit")
 
 for(let i=0; i < textInput.length; i++){
 	textInput[i].addEventListener("blur", function(e){
@@ -50,9 +50,8 @@ mailInput.addEventListener("blur", function(){
 	}
 });
 
-
-//boutonDenvoi.setAttribute("href", "commande.html?id=" + id);
-boutonDenvoi.addEventListener("click", (e) => {
+submit.addEventListener("click", (e) => {
+	e.preventDefault();
 	let prenom = textInput[1].value;
 	let nom = textInput[0].value;
 	let phone = phoneInput.value;
@@ -89,10 +88,10 @@ boutonDenvoi.addEventListener("click", (e) => {
 				}
 				localStorage.setItem("commande", JSON.stringify(ordreEtNom));
 				console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
+				window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/commande.html")
 			}
 		} else {
-			console.log(this.readyState, this.status)
-			console.log(this.responseText);
+			console.log(this.readyState, this.status);
 		}
 	}
 	request.open("POST", "http://localhost:3000/api/teddies/order");
