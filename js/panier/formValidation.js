@@ -6,6 +6,8 @@ let ville = document.getElementById("city");
 let adresse = document.getElementById("adresse");
 let submit = document.getElementById("submit");
 
+
+// Contrôle des noms, prénoms et villes
 for(let i=0; i < textInput.length; i++){
 	textInput[i].addEventListener("blur", function(e){
 		let value = this.value;
@@ -20,9 +22,10 @@ for(let i=0; i < textInput.length; i++){
 	})
 };
 
+
+// Contrôle du numéro de téléphone
 phoneInput.addEventListener("blur", function(e){
 	let value = parseInt(phoneInput.value);
-	console.log(typeof value)
 	if(typeof value !== "number" && phoneInput.value.length > 0){
 		phoneInput.style.border = "3px solid red";
 		phoneInput.value = "";
@@ -37,6 +40,8 @@ phoneInput.addEventListener("blur", function(e){
 	}
 });
 
+
+// Contrôle de l'adresse mail
 mailInput.addEventListener("blur", function(){
 	let regex = /.+@.+\..+/;
 	let inputValue = mailInput.value;
@@ -50,6 +55,8 @@ mailInput.addEventListener("blur", function(){
 	}
 });
 
+
+// Envoi du formulaire
 submit.addEventListener("click", (e) => {
 	e.preventDefault();
 	let prenom = textInput[1].value;
@@ -77,7 +84,22 @@ submit.addEventListener("click", (e) => {
 		products: product_id
 	};
 	let sendForm = JSON.stringify(commande);
-	let request = new XMLHttpRequest;
+
+	let ajax = new Ajax;
+	let data = ajax.request( "http://localhost:3000/api/teddies/order", "POST", sendForm);
+	data.then((response) => {
+		let ordreEtNom = {
+			orderId : response.orderId,
+			prenom : prenom
+		}
+		localStorage.setItem("commande", JSON.stringify(ordreEtNom));
+		console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
+		window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/commande.html");
+	}).catch(error => {
+		console.log(error);
+	})
+
+	/*let request = new XMLHttpRequest;
 	request.onreadystatechange = function(){
 		if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
 			if(this.status == 201){
@@ -96,6 +118,6 @@ submit.addEventListener("click", (e) => {
 	}
 	request.open("POST", "http://localhost:3000/api/teddies/order");
 	request.setRequestHeader("Content-Type", "application/json");
-	request.send(sendForm);
+	request.send(sendForm);*/
 });
 

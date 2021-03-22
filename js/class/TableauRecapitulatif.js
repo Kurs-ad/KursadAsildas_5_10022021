@@ -6,10 +6,8 @@ class TableauRecapitulatif {
 		this.price = price;
 		this.imageUrl = imageUrl;
 		this.description = description;
-		console.log("tesr")
 	}
 	creerLigne(){
-		console.log("tesr2")
 		if(localStorage.getItem("peluchesDansLePanier")){
 			let panierElts = JSON.parse(localStorage.getItem("peluchesDansLePanier"));
 			for(let i=0; i<panierElts.length; i++){
@@ -74,7 +72,6 @@ class TableauRecapitulatif {
 		let gestionDuPanier = new GestionDuPanier;
 		let boutons = document.getElementsByClassName(this._id);
 		let boutonPlus = boutons[1]; // on sait que le premier bouton est - et le deuxième est +
-		console.log(boutonPlus)
 		boutonPlus.addEventListener("click", () => {
 			gestionDuPanier.ajoutDeProduits(this._id);
 			gestionDuPanier.augmenterQuantite(this._id);

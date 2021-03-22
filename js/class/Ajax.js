@@ -1,10 +1,12 @@
 class Ajax {
-	request(url, method){
+	request(url, method, toSend){
 		return new Promise((resolve, reject) => {
 		let request = new XMLHttpRequest();
 		request.onreadystatechange = function(){
 			if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
-		  		if (this.status == 200){
+				let status = JSON.stringify(this.status);
+				console.log(status)
+		  		if (status.startsWith("2")){
 		  			resolve(JSON.parse(this.responseText));
 				} else {
 		    		reject(false)
@@ -12,7 +14,8 @@ class Ajax {
 			}
 		}
 		request.open(method, url);
-		request.send();
+		request.setRequestHeader("Content-Type", "application/json");
+		request.send(toSend);
 		});
 	}
 };
