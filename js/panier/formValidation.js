@@ -4,7 +4,7 @@ let phoneInput = document.getElementById("telephone");
 let mailInput = document.getElementById("mail");
 let ville = document.getElementById("city");
 let adresse = document.getElementById("adresse");
-let submit = document.getElementById("submit")
+let submit = document.getElementById("submit");
 
 for(let i=0; i < textInput.length; i++){
 	textInput[i].addEventListener("blur", function(e){

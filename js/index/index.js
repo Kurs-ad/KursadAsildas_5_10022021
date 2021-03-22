@@ -15,4 +15,4 @@ data.then((response) => {
 }).catch(error =>{
 	console.log(error)
 });
-new Panier;
+new GestionDuPanier;

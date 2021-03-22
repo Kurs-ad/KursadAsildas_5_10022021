@@ -1,4 +1,4 @@
-class ElementsDuPanier {
+class TableauRecapitulatif {
 	constructor(colors, _id, name, price, imageUrl, description){
 		this.colors = colors; 
 		this._id = _id;
@@ -6,8 +6,10 @@ class ElementsDuPanier {
 		this.price = price;
 		this.imageUrl = imageUrl;
 		this.description = description;
+		console.log("tesr")
 	}
-	tableauPanier(){
+	creerLigne(){
+		console.log("tesr2")
 		if(localStorage.getItem("peluchesDansLePanier")){
 			let panierElts = JSON.parse(localStorage.getItem("peluchesDansLePanier"));
 			for(let i=0; i<panierElts.length; i++){
@@ -42,7 +44,6 @@ class ElementsDuPanier {
 					let quantity = document.createElement("span");
 					quantity.setAttribute("class", "quantity");
 					quantity.textContent = " " + value + " ";
-					console.log(key)
 					
 					colonneDescriptif.innerHTML = "<strong>" + this.name + "</strong>" + "<br/><br/>"+ this.description + "<br/><br/>" + "Quantité : ";
 					colonneDescriptif.appendChild(boutonSupprimer);
@@ -68,5 +69,22 @@ class ElementsDuPanier {
 				}
 			}
 		}
+	}
+	gestionDuPanier(){
+		let gestionDuPanier = new GestionDuPanier;
+		let boutons = document.getElementsByClassName(this._id);
+		let boutonPlus = boutons[1]; // on sait que le premier bouton est - et le deuxième est +
+		console.log(boutonPlus)
+		boutonPlus.addEventListener("click", () => {
+			gestionDuPanier.ajoutDeProduits(this._id);
+			gestionDuPanier.augmenterQuantite(this._id);
+			gestionDuPanier.iconePanier();
+		});
+		let boutonMoins = boutons[0];
+		boutonMoins.addEventListener('click', () => {
+			gestionDuPanier.suppressionDeProduits(this._id);
+			gestionDuPanier.diminuerQuantite(this._id);
+			gestionDuPanier.iconePanier();
+		});
 	}
 };

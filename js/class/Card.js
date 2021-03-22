@@ -103,18 +103,27 @@ class Card {
 		// création du prix de la carte
 		let p = document.createElement("p");
 		p.setAttribute("class", "card-text");
-		p.innerHTML = this.price/100 + " €" + "<br/>" + this.description + "<br/><br/><button id='boutonSupprimer' class='col-6 btn btn-light'>Supprimer du panier</button><button id='boutonAjouter' class='col-6 btn btn-primary'>Ajouter au panier</button>" ;
+		p.innerHTML = this.price/100 + " €" + "<br/>" + this.description + "<br/><br/><button class='" + this._id + " supprimerProduit col-6 btn btn-light'>Supprimer du panier</button><button class='" + this._id + " ajouterProduit col-6 btn btn-primary'>Ajouter au panier</button>" ;
 		divCardBody.appendChild(p);
 
 		// boutons ajouter et supprimer
-		document.getElementById("boutonAjouter").addEventListener("click", function(){
-		ajoutDeProduits(getIdOnUrl());
-		});
-		document.getElementById("boutonSupprimer").addEventListener("click", function(){
-		suppressionDeProduits(getIdOnUrl());
-		});
-		let ajouterSupprimer = new AjouterSupprimer;
-		ajouterSupprimer.ajoutDeProduits(this._id);
-		ajouterSupprimer.suppressionDeProduits(this._id);
+		
+	}
+	gestionDuPanier(){
+		let gestionDuPanier = new GestionDuPanier;
+		let boutonsAjouter = document.getElementsByClassName("ajouterProduit");
+		for(let i=0; i < boutonsAjouter.length; i++){
+			boutonsAjouter[i].addEventListener("click", () => {
+				gestionDuPanier.ajoutDeProduits(boutonsAjouter[i].classList[0]);
+				gestionDuPanier.iconePanier();
+			})
+		};
+		let boutonsSupprimer = document.getElementsByClassName("supprimerProduit");
+		for(let x=0; x< boutonsSupprimer.length; x++){
+			boutonsSupprimer[x].addEventListener("click", () => {
+				gestionDuPanier.suppressionDeProduits(boutonsSupprimer[x].classList[0]);
+				gestionDuPanier.iconePanier();
+			})
+		};
 	}
 }
