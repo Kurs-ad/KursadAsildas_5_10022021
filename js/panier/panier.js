@@ -15,6 +15,6 @@ for(let i=0; i<panierElts.length; i++){
 		tableau.creerLigne();
 		tableau.gestionDuPanier();
 	}).catch(error => {
-	console.log(error);
+		alert(error);
 	});
 }

@@ -9,7 +9,7 @@ class Ajax {
 		  		if (status.startsWith("2")){
 		  			resolve(JSON.parse(this.responseText));
 				} else {
-		    		reject(false)
+		    		reject("Erreur de type " + this.status);
 		    	}
 			}
 		}

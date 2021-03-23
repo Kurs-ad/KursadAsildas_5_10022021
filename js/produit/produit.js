@@ -14,5 +14,5 @@ data.then((response) => {
 		card.generateCardProduit();
 		card.gestionDuPanier();
 }).catch(error => {
-	console.log(error);
+	alert(error);
 });

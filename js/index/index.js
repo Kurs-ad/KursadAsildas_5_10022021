@@ -13,6 +13,6 @@ data.then((response) => {
 		card.generateCardIndex();
 	};
 }).catch(error =>{
-	console.log(error)
+	alert(error);
 });
 new GestionDuPanier;
