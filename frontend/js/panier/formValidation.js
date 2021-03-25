@@ -94,30 +94,9 @@ submit.addEventListener("click", (e) => {
 		}
 		localStorage.setItem("commande", JSON.stringify(ordreEtNom));
 		console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
-		window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/commande.html");
+		window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/frontend/commande.html");
 	}).catch(error => {
 		console.log(error);
 	})
-
-	/*let request = new XMLHttpRequest;
-	request.onreadystatechange = function(){
-		if(this.readyState == XMLHttpRequest.DONE && this.readyState == 4){
-			if(this.status == 201){
-				console.log(JSON.parse(this.responseText).orderId, typeof JSON.parse(this.responseText));
-				let ordreEtNom = {
-					orderId : JSON.parse(this.responseText).orderId,
-					prenom : prenom
-				}
-				localStorage.setItem("commande", JSON.stringify(ordreEtNom));
-				console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
-				window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/commande.html")
-			}
-		} else {
-			console.log(this.readyState, this.status);
-		}
-	}
-	request.open("POST", "http://localhost:3000/api/teddies/order");
-	request.setRequestHeader("Content-Type", "application/json");
-	request.send(sendForm);*/
 });
 
