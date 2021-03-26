@@ -51,7 +51,7 @@ class Card {
 		p.textContent = this.price/100 + " €";
 		divCardBody.appendChild(p);
 	}
-	generateCardProduit(response){
+	generateCardProduit(){
 		let row = document.getElementById("row");
 
 		// création de la première div col
@@ -104,10 +104,7 @@ class Card {
 		let p = document.createElement("p");
 		p.setAttribute("class", "card-text");
 		p.innerHTML = this.price/100 + " €" + "<br/>" + this.description + "<br/><br/><button class='" + this._id + " supprimerProduit col-6 btn btn-light'>Supprimer du panier</button><button class='" + this._id + " ajouterProduit col-6 btn btn-primary'>Ajouter au panier</button>" ;
-		divCardBody.appendChild(p);
-
-		// boutons ajouter et supprimer
-		
+		divCardBody.appendChild(p);		
 	}
 	gestionDuPanier(){
 		let gestionDuPanier = new GestionDuPanier;
