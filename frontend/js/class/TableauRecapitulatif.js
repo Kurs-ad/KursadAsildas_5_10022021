@@ -75,7 +75,6 @@ class TableauRecapitulatif {
 		let boutonPlus = boutons[1]; // on sait que le premier bouton est - et le deuxième est +
 		boutonPlus.addEventListener("click", () => {
 			gestionDuPanier.ajoutDeProduits(this._id);
-			gestionDuPanier.augmenterQuantite(this._id);
 			gestionDuPanier.iconePanier();
 		});
 		let boutonMoins = boutons[0];

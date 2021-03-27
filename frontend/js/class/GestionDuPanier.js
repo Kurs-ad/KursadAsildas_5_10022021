@@ -14,6 +14,7 @@ class GestionDuPanier {
 					if(objectKeys[0] == param){
 						produitsDansLocalStorage[i][param] += 1;
 						localStorage.setItem("peluchesDansLePanier", JSON.stringify(produitsDansLocalStorage));
+						this.augmenterQuantite(param);
 						break
 					} else {
 						if(i == produitsDansLocalStorage.length - 1){
@@ -21,6 +22,7 @@ class GestionDuPanier {
 							objetTemporaire[param] = 1;
 							produitsDansLocalStorage.push(objetTemporaire);
 							localStorage.setItem("peluchesDansLePanier", JSON.stringify(produitsDansLocalStorage));
+							this.augmenterQuantite(param);
 							break
 						}
 					}
@@ -32,6 +34,7 @@ class GestionDuPanier {
 				objetStorage[param] = 1;
 				produitsDansLocalStorage.push(objetStorage);
 				localStorage.setItem("peluchesDansLePanier", JSON.stringify(produitsDansLocalStorage));
+				this.augmenterQuantite(param);
 				break // Empeche la répétition
 			}
 		}
