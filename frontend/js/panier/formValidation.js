@@ -93,7 +93,6 @@ submit.addEventListener("click", (e) => {
 			prenom : prenom
 		}
 		localStorage.setItem("commande", JSON.stringify(ordreEtNom));
-		console.log(JSON.parse(localStorage.getItem("commande")), typeof JSON.parse(localStorage.getItem("commande")));
 		window.location.assign("file:///C:/Users/Public/Desktop/Openclassrooms/Projet%205/code/JWDP5/frontend/commande.html");
 	}).catch(error => {
 		console.log(error);
