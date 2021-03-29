@@ -31,6 +31,7 @@ class Card {
 		// création de l'image de la carte, enfant du second col
 		let img = document.createElement("img");
 		img.setAttribute("class", "card-img-top");
+		img.setAttribute("alt", "peluche_" + this.name);
 		img.setAttribute("src", this.imageUrl);
 		divCard.appendChild(img);
 
@@ -68,6 +69,7 @@ class Card {
 		// création de l'image de la carte, enfant du second col
 		let img = document.createElement("img");
 		img.setAttribute("class", "card-img-top");
+		img.setAttribute("alt", "peluche_" + this.name);
 		img.setAttribute("src", this.imageUrl);
 		divCard.appendChild(img);
 

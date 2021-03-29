@@ -22,7 +22,7 @@ class TableauRecapitulatif {
 
 					// création d'une colonne de la ligne principale contenant une image d'un produit du panier
 					let colonneImage = document.createElement("td");
-					colonneImage.innerHTML = "<img style='width:200px; height:200px; object-fit:cover' src='" + this.imageUrl + "'/>";
+					colonneImage.innerHTML = "<img style='width:200px; height:200px; object-fit:cover' alt='peluche_" + this.name +"' src='" + this.imageUrl + "'/>";
 
 					// création d'une colonne de la ligne principale contenant la description du produit
 					let colonneDescriptif = document.createElement("td");
